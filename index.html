@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="aframe.min.js"></script>
+    <script src="aframe-ar.js"></script>
+    <script src="node_modules/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+</head>
+<body style="margin:0px; overflow: hidden;">
+    <a-scene embedded arjs>
+        <a-marker preset="hiro">
+            <a-entity
+                environment="preset: forest; dressingAmount: 500;"
+            ></a-entity>
+            <a-entity
+                gltf-model="url(model/obj.glb)" <!-- Ruta al modelo .glb en la carpeta "model" -->
+                rotation="0 90 0"
+            ></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+</body>
+</html>
