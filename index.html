@@ -11,21 +11,21 @@
     <!-- Botones de navegación -->
     <a-image src="boton-izquierda.png" position="-2 2 -5" onclick="cambiarImagen(-1)"></a-image>
     <a-image src="boton-derecha.png" position="2 2 -5" onclick="cambiarImagen(1)"></a-image>
-    
-    <script>
-      // Imagen actual y lista de imágenes 360
-      var imagenActual = 1;
-      var imagenes = ["imagen360-1.jpg", "imagen360-2.jpg", "imagen360-3.jpg"];
-
-      // Función para cambiar la imagen
-      function cambiarImagen(direccion) {
-        imagenActual += direccion;
-        if (imagenActual < 0) imagenActual = imagenes.length - 1;
-        if (imagenActual >= imagenes.length) imagenActual = 0;
-        var nuevaImagen = imagenes[imagenActual];
-        document.querySelector('a-sky').setAttribute('src', nuevaImagen);
-      }
-    </script>
   </a-scene>
+  
+  <script>
+    // Imagen actual y lista de imágenes 360
+    var imagenActual = 0;
+    var imagenes = ["imagen360-1.jpg", "imagen360-2.jpg", "imagen360-3.jpg"];
+    
+    // Función para cambiar la imagen
+    function cambiarImagen(direccion) {
+      imagenActual += direccion;
+      if (imagenActual < 0) imagenActual = imagenes.length - 1;
+      if (imagenActual >= imagenes.length) imagenActual = 0;
+      var nuevaImagen = imagenes[imagenActual];
+      document.querySelector('a-sky').setAttribute('src', nuevaImagen);
+    }
+  </script>
 </body>
 </html>
