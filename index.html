@@ -6,7 +6,7 @@
 <body>
   <a-scene>
     <!-- Escenario inicial (imagen 360) -->
-    <a-sky src="imagen360-1.jpg"></a-sky>
+    <a-sky id="escenario" src="imagen360-1.jpg"></a-sky>
     
     <!-- Botones de navegación -->
     <a-image src="boton-izquierda.png" position="-2 2 -5" onclick="cambiarImagen(-1)"></a-image>
@@ -24,7 +24,10 @@
       if (imagenActual < 0) imagenActual = imagenes.length - 1;
       if (imagenActual >= imagenes.length) imagenActual = 0;
       var nuevaImagen = imagenes[imagenActual];
-      document.querySelector('a-sky').setAttribute('src', nuevaImagen);
+      document.querySelector('#escenario').setAttribute('src', nuevaImagen);
+
+      // Mostrar una alerta cuando se hace clic en un botón
+      alert("Clicaste en un botón para cambiar la imagen.");
     }
   </script>
 </body>
