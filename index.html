@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="aframe.min.js"></script>
-    <script src="aframe-ar.js"></script>
-    <script src="node_modules/aframe-environment-component/dist/aframe-environment-component.min.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
-<body style="margin:0px; overflow: hidden;">
-    <a-scene embedded arjs>
-        <a-marker preset="hiro">
-            <a-entity
-                environment="preset: forest; dressingAmount: 500;"
-            ></a-entity>
-            <a-entity
-                gltf-model="url(model/obj.glb)" <!-- Ruta al modelo .glb en la carpeta "model" -->
-                rotation="0 90 0"
-            ></a-entity>
-        </a-marker>
-        <a-entity camera></a-entity>
-    </a-scene>
+<body>
+  <a-scene>
+    <!-- Escenario inicial (imagen 360) -->
+    <a-sky src="imagen360-1.jpg"></a-sky>
+    
+    <!-- Botones de navegación -->
+    <a-image src="boton-izquierda.png" position="-2 2 -5" onclick="cambiarImagen(-1)"></a-image>
+    <a-image src="boton-derecha.png" position="2 2 -5" onclick="cambiarImagen(1)"></a-image>
+    
+    <script>
+      // Imagen actual y lista de imágenes 360
+      var imagenActual = 1;
+      var imagenes = ["imagen360-1.jpg", "imagen360-2.jpg", "imagen360-3.jpg"];
+
+      // Función para cambiar la imagen
+      function cambiarImagen(direccion) {
+        imagenActual += direccion;
+        if (imagenActual < 0) imagenActual = imagenes.length - 1;
+        if (imagenActual >= imagenes.length) imagenActual = 0;
+        var nuevaImagen = imagenes[imagenActual];
+        document.querySelector('a-sky').setAttribute('src', nuevaImagen);
+      }
+    </script>
+  </a-scene>
 </body>
 </html>
