@@ -5,30 +5,39 @@
 </head>
 <body>
   <a-scene>
-    <!-- Escenario inicial (imagen 360) -->
-    <a-sky id="escenario" src="imagen360-1.jpg"></a-sky>
+    <a-sky color="#000"></a-sky>
     
-    <!-- Botones de navegación -->
-    <a-image src="boton-izquierda.png" position="-2 2 -5" onclick="cambiarImagen(-1)"></a-image>
-    <a-image src="boton-derecha.png" position="2 2 -5" onclick="cambiarImagen(1)"></a-image>
+    <!-- Botón en el centro de la escena -->
+    <a-box 
+      color="blue" 
+      position="0 1.6 -5" 
+      scale="2 1 0.1"
+      my-click-event="_event: click; showHint: true">
+    </a-box>
+    
+    <a-entity id="alert" visible="false">
+      <a-plane color="white" width="3" height="1" position="0 1.6 -4.8"></a-plane>
+      <a-text value="¡Hiciste clic en el botón!" align="center" position="0 1.6 -4.7" color="black"></a-text>
+    </a-entity>
   </a-scene>
   
   <script>
-    // Imagen actual y lista de imágenes 360
-    var imagenActual = 0;
-    var imagenes = ["imagen360-1.jpg", "imagen360-2.jpg", "imagen360-3.jpg"];
-    
-    // Función para cambiar la imagen
-    function cambiarImagen(direccion) {
-      imagenActual += direccion;
-      if (imagenActual < 0) imagenActual = imagenes.length - 1;
-      if (imagenActual >= imagenes.length) imagenActual = 0;
-      var nuevaImagen = imagenes[imagenActual];
-      document.querySelector('#escenario').setAttribute('src', nuevaImagen);
-
-      // Mostrar una alerta cuando se hace clic en un botón
-      alert("Clicaste en un botón para cambiar la imagen.");
-    }
+    AFRAME.registerComponent('my-click-event', {
+      schema: {
+        showHint: {default: false}
+      },
+      init: function () {
+        this.el.addEventListener('click', function () {
+          if (this.data.showHint) {
+            var alert = document.querySelector('#alert');
+            alert.setAttribute('visible', 'true');
+            setTimeout(function () {
+              alert.setAttribute('visible', 'false');
+            }, 2000);
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
